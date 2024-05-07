@@ -1,4 +1,6 @@
 #include <GL/glut.h>
+
+#include "Main.h"
 #include "tank.h"
 #include "projectile.h"
 
@@ -9,6 +11,29 @@ Tank tank2("/Image/panzer.png", 300, 0); // Initial position of tank 2
 GLfloat eyeX = 0.0f;
 GLfloat eyeY = 2.0f;
 GLfloat eyeZ = 5.0f;
+
+
+int main(int argc, char** argv) {
+    glutInit(&argc, argv);
+    //Tank tank1 = new Tank("/Image/t34.png", 100, 100);
+    //Tank tank2 = new Tank("/Image/panzer.png", 500, 500);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    glutInitWindowSize(800, 600);
+    glutCreateWindow("Tank Game");
+
+    ///BackGround green color
+    glClearColor(0.0, 1.0, 0.0, 1.0);
+
+    glutReshapeFunc(my_reshape);
+    glutDisplayFunc(display);
+    glutTimerFunc(0, update, 0);
+    glutKeyboardFunc(handleKeyPress);
+    glutSpecialFunc(handleSpecialKeyPress);
+
+    glutMainLoop();
+
+    return 0;
+}
 
 void my_reshape(int  width, int  height)
 {
@@ -28,7 +53,7 @@ void display() {
 
     //tank1 = new Tank("/Image/t34.png", 100, 100);
     //gluLookAt(eyeX, eyeY, eyeZ, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
-    
+
     tank1.draw();
     tank2.draw();
 
@@ -88,26 +113,4 @@ void handleSpecialKeyPress(int key, int x, int y) {
         tank2.moveRight();
         break;
     }
-}
-
-int main(int argc, char** argv) {
-    glutInit(&argc, argv);
-    //Tank tank1 = new Tank("/Image/t34.png", 100, 100);
-    //Tank tank2 = new Tank("/Image/panzer.png", 500, 500);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-    glutInitWindowSize(800, 600);
-    glutCreateWindow("Tank Game");
-
-    ///BackGround green color
-    glClearColor(0.0, 1.0, 0.0, 1.0);
-
-    glutReshapeFunc(my_reshape);
-    glutDisplayFunc(display);
-    glutTimerFunc(0, update, 0);
-    glutKeyboardFunc(handleKeyPress);
-    glutSpecialFunc(handleSpecialKeyPress);
-
-    glutMainLoop();
-
-    return 0;
 }
