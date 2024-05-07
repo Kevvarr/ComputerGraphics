@@ -1,22 +1,13 @@
-#include <GL/glut.h>
 
 #include "Main.h"
-#include "tank.h"
-#include "projectile.h"
-
-
-Tank tank1("/Image/t34.png", -300, 0); // Initial position of tank 1
-Tank tank2("/Image/panzer.png", 300, 0); // Initial position of tank 2
-
-GLfloat eyeX = 0.0f;
-GLfloat eyeY = 2.0f;
-GLfloat eyeZ = 5.0f;
-
+#include "GlobalDeclarations.h"
 
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
     //Tank tank1 = new Tank("/Image/t34.png", 100, 100);
     //Tank tank2 = new Tank("/Image/panzer.png", 500, 500);
+
+    // Windows Config
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(800, 600);
     glutCreateWindow("Tank Game");
@@ -27,23 +18,14 @@ int main(int argc, char** argv) {
     glutReshapeFunc(my_reshape);
     glutDisplayFunc(display);
     glutTimerFunc(0, update, 0);
+
+    // Handle funtions
     glutKeyboardFunc(handleKeyPress);
     glutSpecialFunc(handleSpecialKeyPress);
 
     glutMainLoop();
 
     return 0;
-}
-
-void my_reshape(int  width, int  height)
-{
-    int aspect = width * 1.0f / height;
-    glViewport(0, 0, width, height);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluOrtho2D(-400, 400, -300, 300);
-    glMatrixMode(GL_MODELVIEW);
-    //gluPerspective(60.0f, aspect, 0.1f, 10.0f);
 }
 
 void display() {
@@ -72,6 +54,20 @@ void update(int value) {
     glutPostRedisplay();
     glutTimerFunc(16, update, 0); // Update every 16 milliseconds (about 60 fps)
 }
+
+void my_reshape(int  width, int  height)
+{
+    int aspect = width * 1.0f / height;
+    glViewport(0, 0, width, height);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-400, 400, -300, 300);
+    glMatrixMode(GL_MODELVIEW);
+    //gluPerspective(60.0f, aspect, 0.1f, 10.0f);
+}
+
+
+
 
 void handleKeyPress(unsigned char key, int x, int y) {
     switch (key) {

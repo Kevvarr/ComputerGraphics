@@ -150,6 +150,7 @@
     <ClCompile Include="Tank.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="GlobalDeclarations.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="projectile.h" />
     <ClInclude Include="Tank.h" />
