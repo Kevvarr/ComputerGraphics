@@ -1,6 +1,22 @@
 
 #include "Main.h"
 #include "GlobalDeclarations.h"
+#include <map>
+
+std::map< int, bool > keys;
+
+void special(int key, int x, int y)
+{
+    keys[key] = true;
+}
+void specialUp(int key, int x, int y)
+{
+    keys[key] = false;
+}
+
+
+
+
 
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
@@ -13,15 +29,21 @@ int main(int argc, char** argv) {
     glutCreateWindow("Tank Game");
 
     ///BackGround green color
-    glClearColor(0.0, 1.0, 0.0, 1.0);
+    //glClearColor(0.0, 1.0, 0.0, 1.0);
+    glClearColor(0.0, 0.0, 0.0, 1.0); // Black background
 
     glutReshapeFunc(my_reshape);
     glutDisplayFunc(display);
     glutTimerFunc(0, update, 0);
 
     // Handle funtions
+    glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
+    //glutIdleFunc(myIdleFunc);
     glutKeyboardFunc(handleKeyPress);
-    glutSpecialFunc(handleSpecialKeyPress);
+    
+    //glutSpecialFunc(handleSpecialKeyPress);
+    glutSpecialFunc(special);
+    glutSpecialUpFunc(specialUp);
 
     glutMainLoop();
 
@@ -91,22 +113,45 @@ void handleKeyPress(unsigned char key, int x, int y) {
         tank2.shoot();
         break;
         */
+    default:
+        tank1.moveIdle();
+        //key = " ";
     }
 }
 
 void handleSpecialKeyPress(int key, int x, int y) {
-    switch (key) {
-    case GLUT_KEY_UP:
-        tank2.moveUp();
-        break;
-    case GLUT_KEY_DOWN:
-        tank2.moveDown();
-        break;
-    case GLUT_KEY_LEFT:
+    //switch (key) {
+    //case GLUT_KEY_UP:
+    //    tank2.moveUp();
+    //    break;
+    //case GLUT_KEY_DOWN:
+    //    tank2.moveDown();
+    //    break;
+    //case GLUT_KEY_LEFT:
+    //    tank2.moveLeft();
+    //    break;
+    //case GLUT_KEY_RIGHT:
+    //    tank2.moveRight();
+    //    break;
+    //default:
+    //    tank2.moveIdle();
+    //}
+    if (keys[GLUT_KEY_LEFT])
+    {
         tank2.moveLeft();
-        break;
-    case GLUT_KEY_RIGHT:
+        std::cout << "Moving Down";
+
+    }
+    if (keys[GLUT_KEY_RIGHT])
+    {
         tank2.moveRight();
-        break;
+    }
+    if (keys[GLUT_KEY_UP])
+    {
+        tank2.moveUp();
+    }
+    if (keys[GLUT_KEY_DOWN])
+    {
+        tank2.moveDown();
     }
 }
