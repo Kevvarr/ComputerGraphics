@@ -132,6 +132,9 @@ void display() {
     //tank1 = new Tank("/Image/t34.png", 100, 100);
     //gluLookAt(eyeX, eyeY, eyeZ, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
+    //std::cout << "Direction tank2 X:" << tank2.getDirectionX() << ", " << tank2.getDirectionY() << std::endl;
+
+
     tank1.draw();
     tank2.draw();
 
@@ -170,6 +173,7 @@ void my_reshape(int  width, int  height)
 
 
 void handleKeyPress(unsigned char key, int x, int y) {
+    std::cout << "# key " << key << " hold down" << std::endl;
     switch (key) {
     case 'w':
         tank1.moveUp();
@@ -196,18 +200,20 @@ void handleKeyPress(unsigned char key, int x, int y) {
 }
 
 void handleKeyPressUp(unsigned char key, int x, int y) {
+    std::cout << "# key " << key << " released" << std::endl;
+
     switch (key) {
     case 'w':
-        tank1.moveIdle();
+        tank1.moveLeftRelease();
         break;
     case 's':
-        tank1.moveIdle();
+        tank1.moveRightRelease();
         break;
     case 'a':
-        tank1.moveIdle();
+        tank1.moveUpRelease();
         break;
     case 'd':
-        tank1.moveIdle();
+        tank1.moveDownRelease();
         break;
         /*
     case ' ':
@@ -223,7 +229,7 @@ void handleKeyPressUp(unsigned char key, int x, int y) {
 
 void handleSpecialKeyPress(int key, int x, int y) {
     keys[key] = true;
-    //std::cout << "special key " << key << " hold down" << std::endl;
+    std::cout << "special key " << key << " hold down" << std::endl;
 
     if (keys[GLUT_KEY_LEFT])    tank2.moveLeft();
     if (keys[GLUT_KEY_RIGHT])   tank2.moveRight();
@@ -234,7 +240,7 @@ void handleSpecialKeyPress(int key, int x, int y) {
 void handleSpecialKeyPressUp(int key, int x, int y)
 {
     keys[key] = false;
-    //std::cout << "special key" << key << " released" << std::endl;
+    std::cout << "special key" << key << " released" << std::endl;
 
     if (!keys[GLUT_KEY_LEFT])   tank2.moveLeftRelease();
     if (!keys[GLUT_KEY_RIGHT])  tank2.moveRightRelease();

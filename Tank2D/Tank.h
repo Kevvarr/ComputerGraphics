@@ -16,6 +16,8 @@ public:
     void moveLeftRelease();
     void moveRightRelease();
     void moveIdle();
+    float getDirectionX();
+    float getDirectionY();
     void shoot();
     void update();
 
