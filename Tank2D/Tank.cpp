@@ -52,7 +52,7 @@ void Tank::moveRight() {
 void Tank::moveIdle() {
     directionX = 0.0f;
     directionY = 0.0f;
-    std::cout << "Moving Idle";
+    //std::cout << "Moving Idle";
 }
 
 void Tank::shoot() {
