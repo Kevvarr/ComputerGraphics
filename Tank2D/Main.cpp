@@ -225,10 +225,10 @@ void handleSpecialKeyPress(int key, int x, int y) {
     keys[key] = true;
     //std::cout << "special key " << key << " hold down" << std::endl;
 
-    if (keys[GLUT_KEY_LEFT])         tank2.moveLeft();
-    else if (keys[GLUT_KEY_RIGHT])   tank2.moveRight();
-    else if (keys[GLUT_KEY_UP])      tank2.moveUp();
-    else if (keys[GLUT_KEY_DOWN])    tank2.moveDown();
+    if (keys[GLUT_KEY_LEFT])    tank2.moveLeft();
+    if (keys[GLUT_KEY_RIGHT])   tank2.moveRight();
+    if (keys[GLUT_KEY_UP])      tank2.moveUp();
+    if (keys[GLUT_KEY_DOWN])    tank2.moveDown();
 }
 
 void handleSpecialKeyPressUp(int key, int x, int y)
@@ -236,8 +236,8 @@ void handleSpecialKeyPressUp(int key, int x, int y)
     keys[key] = false;
     //std::cout << "special key" << key << " released" << std::endl;
 
-    if (!keys[GLUT_KEY_LEFT])        tank2.moveIdle();
-    else if (!keys[GLUT_KEY_RIGHT])  tank2.moveIdle();
-    else if (!keys[GLUT_KEY_UP])     tank2.moveIdle();
-    else if (!keys[GLUT_KEY_DOWN])   tank2.moveIdle();
+    if (!keys[GLUT_KEY_LEFT])   tank2.moveLeftRelease();
+    if (!keys[GLUT_KEY_RIGHT])  tank2.moveRightRelease();
+    if (!keys[GLUT_KEY_UP])     tank2.moveUpRelease();
+    if (!keys[GLUT_KEY_DOWN])   tank2.moveDownRelease();
 }

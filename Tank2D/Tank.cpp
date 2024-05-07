@@ -26,26 +26,42 @@ void Tank::draw() {
 }
 
 void Tank::moveUp() {
-    directionX = 0.0f;
     directionY = 1.0f;
     //std::cout << "Moving Up";
 }
 
 void Tank::moveDown() {
-    directionX = 0.0f;
     directionY = -1.0f;
     //std::cout << "Moving Down";
 }
 
 void Tank::moveLeft() {
     directionX = -1.0f;
-    directionY = 0.0f;
     //std::cout << "Moving Left";
 }
 
 void Tank::moveRight() {
     directionX = 1.0f;
+    //std::cout << "Moving Right";
+}
+
+void Tank::moveUpRelease() {
     directionY = 0.0f;
+    //std::cout << "Moving Up";
+}
+
+void Tank::moveDownRelease() {
+    directionY = 0.0f;
+    //std::cout << "Moving Down";
+}
+
+void Tank::moveLeftRelease() {
+    directionX = 0.0f;
+    //std::cout << "Moving Left";
+}
+
+void Tank::moveRightRelease() {
+    directionX = 0.0f;
     //std::cout << "Moving Right";
 }
 

@@ -10,7 +10,11 @@ public:
     void moveUp();
     void moveDown();
     void moveLeft();
-    void moveRight();
+    void moveRight();    
+    void moveUpRelease();
+    void moveDownRelease();
+    void moveLeftRelease();
+    void moveRightRelease();
     void moveIdle();
     void shoot();
     void update();
