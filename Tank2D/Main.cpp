@@ -2,6 +2,21 @@
 #include "Main.h"
 #include "GlobalDeclarations.h"
 
+
+bool keyStates[256] = { false };
+
+void keyOperations() {
+    if (keyStates[13] == true && viewPage == INTRO) {
+        viewPage = MENU;
+        printf("view value changed to %d", viewPage);
+        printf("enter key pressed\n");
+    }
+
+    if (viewPage == GAME) {
+
+    }
+}
+
 void passiveMotionFunc(int x, int y) {
 
     //when mouse not clicked
@@ -37,31 +52,12 @@ void introScreen()
     glClear(GL_COLOR_BUFFER_BIT);
 
     glColor3f(1.0, 0.0, 0.0);
-    displayRasterText(-425, 490, 0.0, "NMAM INSTITUTE OF TECHNOLOGY");
+    displayRasterText(-300, 200, 0.0, "Tank 2d");
     glColor3f(1.0, 1.0, 1.0);
-    displayRasterText(-700, 385, 0.0, "DEPARTMENT OF COMPUTER SCIENCE AND ENGINEERING");
-    glColor3f(0.0, 0.0, 1.0);
-    displayRasterText(-225, 300, 0.0, "A MINI PROJECT ON ");
-    glColor3f(1.0, 0.0, 1.0);
-    displayRasterText(-125, 225, 0.0, "Space Shooter");
-    glColor3f(1.0, 0.7, 0.8);
-    displayRasterText(-100, 150, 0.0, "created by");
-    glColor3f(1.0, 1.0, 1.0);
-    displayRasterText(-130, 80, 0.0, "SHOOTERS");
-    glColor3f(1.0, 0.0, 0.0);
-    displayRasterText(-800, -100, 0.0, " STUDENT NAMES");
-    glColor3f(1.0, 1.0, 1.0);
-    displayRasterText(-800, -200, 0.0, " Saurav N Shetty");
-    displayRasterText(-800, -285, 0.0, " Rajath R Pai");
-    glColor3f(1.0, 0.0, 0.0);
-    displayRasterText(500, -100, 0.0, "Under the Guidance of");
-    glColor3f(1.0, 1.0, 1.0);
-    displayRasterText(500, -200, 0.0, "Prof X");
-    glColor3f(1.0, 0.0, 0.0);
-    displayRasterText(-250, -400, 0.0, "Academic Year 2020-2021");
-    glColor3f(1.0, 1.0, 1.0);
-    displayRasterText(-300, -550, 0.0, "Press ENTER to start the game");
+    displayRasterText(-300, -200, 0.0, "Press ENTER to start the game");
     glFlush();
+    glutPostRedisplay();
+
     //glutSwapBuffers();
 }
 
@@ -217,9 +213,9 @@ int main(int argc, char** argv) {
 
     // Windows Config
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-    //glutInitWindowSize(800, 600);
+    glutInitWindowSize(800, 600);
     //glutInitWindowPosition(0, 0);
-    glutInitWindowSize(1200, 900);
+    //glutInitWindowSize(1200, 900);
     glutCreateWindow("Tank Game");
 
     glClearColor(0.0, 0.0, 0.0, 0);
@@ -255,13 +251,15 @@ int main(int argc, char** argv) {
     return 0;
 }
 
-void display() {
+void display() {     
+    keyOperations();
     glClear(GL_COLOR_BUFFER_BIT);
 
     switch (viewPage)
     {
     case INTRO:
         introScreen();
+        //std::cout << "INTRO MODE" << std::endl;
         break;
     case MENU:
         startScreenDisplay();
@@ -336,11 +334,12 @@ void handleKeyPress(unsigned char key, int x, int y) {
         /*
     case ' ':
         tank1.shoot();
-        break;
+        break;*/
+        
     case 13: // ASCII code for Enter key
         tank2.shoot();
         break;
-        */
+        
     }
 }
 

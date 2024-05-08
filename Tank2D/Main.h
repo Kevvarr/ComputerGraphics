@@ -14,6 +14,7 @@
 #include "tank.h"
 #include "projectile.h"
 
+int main(int argc, char** argv);
 void display();
 void my_reshape(int  width, int  height);
 void update(int value);
