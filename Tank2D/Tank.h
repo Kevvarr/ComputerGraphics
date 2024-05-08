@@ -1,6 +1,5 @@
-#ifndef TANK_H
-#define TANK_H
-
+#ifndef _TANK_H
+#define _TANK_H
 #include <string>
 
 class Tank {
@@ -25,7 +24,7 @@ private:
     std::string imageFile;
     int x, y;
     int size = 20;
-    int speed = 3.5;
+    float speed = 3.5;
     float directionX = 0.0f; // Horizontal direction (-1 for left, 1 for right)
     float directionY = 0.0f; // Vertical direction (-1 for down, 1 for up)
 };

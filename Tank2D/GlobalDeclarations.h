@@ -1,5 +1,4 @@
 #pragma once
-
 #define INIT_WINDOWS_SIZE_WEIGHT 800
 #define INIT_WINDOWS_SIZE_HEIGHT 600
 
@@ -8,9 +7,8 @@ float mouseX, mouseY;
 bool mButtonPressed = false;
 
 GLint m_viewport[4]; 
-enum view { INTRO, MENU, GAME, GAMEOVER };
-//enum view { INTRO, MENU, GAME, GAMEOVER };
-view viewPage = INTRO; // initial value
+enum class View { INTRO, MENU, GAME, GAMEOVER };
+View viewPage = View::INTRO; // initial value
 
 Tank tank1("/Image/t34.png", -300, 0); // Initial position of tank 1
 Tank tank2("/Image/panzer.png", 300, 0); // Initial position of tank 2
