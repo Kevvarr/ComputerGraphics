@@ -5,17 +5,6 @@
 
 std::map< int, bool > keys;
 
-void keyOperations() {
-    if (keys[13] == true && viewPage == INTRO) {
-        viewPage = MENU;
-        printf("view value changed to %d", viewPage);
-        printf("enter key pressed\n");
-    }
-
-    if (viewPage == GAME) {
-
-    }
-}
 
 void passiveMotionFunc(int x, int y) {
 
@@ -47,7 +36,17 @@ void displayRasterText(float x, float y, float z, std::string stringToDisplay) {
     }*/
 }
 
-void introScreen()
+void mouseClick(int buttonPressed, int state, int x, int y) {
+    std::cout << "Cursor: " << x << ", " << y << std::endl;
+
+    if (buttonPressed == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+        mButtonPressed = true;
+    else
+        mButtonPressed = false;
+    glutPostRedisplay();
+}
+
+void screenIntro()
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -61,20 +60,7 @@ void introScreen()
     //glutSwapBuffers();
 }
 
-
-
-void mouseClick(int buttonPressed, int state, int x, int y) {
-    std::cout << "Cursor: " << x << ", " << y << std::endl;
-
-    if (buttonPressed == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-        mButtonPressed = true;
-    else
-        mButtonPressed = false;
-    glutPostRedisplay();
-}
-
-
-void startScreenDisplay()
+void screenMenu()
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -192,7 +178,7 @@ void refresh() {
     glutPostRedisplay();
 }
 
-void gameScreenDisplay()
+void screenGame()
 {
     // Update tanks
     tank1.update();
@@ -202,8 +188,6 @@ void gameScreenDisplay()
     Projectile::updateAll();
 
     glutPostRedisplay();
-    glutTimerFunc(16, update, 0); // Update every 16 milliseconds (about 60 fps)
-
 }
 
 int main(int argc, char** argv) {
@@ -261,29 +245,29 @@ int main(int argc, char** argv) {
 }
 
 void display() {     
-    keyOperations();
+    //keyOperations();
     glClear(GL_COLOR_BUFFER_BIT);
 
     switch (viewPage)
     {
     case INTRO:
-        introScreen();
+        screenIntro();
         //std::cout << "INTRO MODE" << std::endl;
         break;
     case MENU:
-        startScreenDisplay();
+        screenMenu();
         break;
     case INSTRUCTIONS:
         //instructionsScreenDisplay();
         break;
     case GAME:
-        gameScreenDisplay();
+        screenGame();
         //reset scaling values
         glScalef(1 / 2, 1 / 2, 0);
         break;
     case GAMEOVER:
         //displayGameOverMessage();
-        startScreenDisplay();
+        screenIntro();
         break;
     }
 
@@ -314,8 +298,9 @@ void update(int value) {
 
     // Update projectiles
     Projectile::updateAll();
-
+    */
     glutPostRedisplay();
+    
     glutTimerFunc(16, update, 0); // Update every 16 milliseconds (about 60 fps)*/
 }
 
@@ -334,6 +319,16 @@ void my_reshape(int  width, int  height)
 
 
 void handleKeyPress(unsigned char key, int x, int y) {
+    keys[key] = true;
+
+    std::cout << "# key " << key << " released" << std::endl;
+    std::cout << "# VIEW:  " << viewPage << "." << std::endl;
+    std::cout << "# key status:  " << keys[13] << "." << std::endl;
+
+    if (keys[13] == true && viewPage == INTRO) viewPage = MENU;
+    if (keys[int('n')] == true && viewPage == MENU) viewPage = GAME;
+
+
     std::cout << "# key " << key << " hold down" << std::endl;
     switch (key) {
     case 'w':
@@ -362,7 +357,9 @@ void handleKeyPress(unsigned char key, int x, int y) {
 }
 
 void handleKeyPressUp(unsigned char key, int x, int y) {
-    std::cout << "# key " << key << " released" << std::endl;
+    keys[key] = false;
+
+
 
     switch (key) {
     case 'w':
@@ -387,6 +384,8 @@ void handleKeyPressUp(unsigned char key, int x, int y) {
         */
         //key = " ";
     }
+
+
 }
 
 void handleSpecialKeyPress(int key, int x, int y) {
