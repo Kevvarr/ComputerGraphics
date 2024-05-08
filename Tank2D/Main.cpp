@@ -1,12 +1,12 @@
 
 #include "Main.h"
 #include "GlobalDeclarations.h"
+#include <map>
 
-
-bool keyStates[256] = { false };
+std::map< int, bool > keys;
 
 void keyOperations() {
-    if (keyStates[13] == true && viewPage == INTRO) {
+    if (keys[13] == true && viewPage == INTRO) {
         viewPage = MENU;
         printf("view value changed to %d", viewPage);
         printf("enter key pressed\n");
@@ -228,7 +228,8 @@ int main(int argc, char** argv) {
     glMatrixMode(GL_MODELVIEW);
 
     ///BackGround green color
-    glClearColor(0.0, 1.0, 0.0, 1.0);
+    //glClearColor(0.0, 1.0, 0.0, 1.0);
+    glClearColor(0.0, 0.0, 0.0, 1.0); // Black background
 
 
 
@@ -245,6 +246,14 @@ int main(int argc, char** argv) {
     glutReshapeFunc(my_reshape);
     glutDisplayFunc(display);
     glutTimerFunc(0, update, 0);
+
+    // Handle funtions
+    glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
+
+    glutKeyboardFunc(handleKeyPress);
+    glutKeyboardUpFunc(handleKeyPressUp);
+    glutSpecialFunc(handleSpecialKeyPress);
+    glutSpecialUpFunc(handleSpecialKeyPressUp);
 
     glutMainLoop();
 
@@ -283,6 +292,9 @@ void display() {
     //tank1 = new Tank("/Image/t34.png", 100, 100);
     //gluLookAt(eyeX, eyeY, eyeZ, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
+    //std::cout << "Direction tank2 X:" << tank2.getDirectionX() << ", " << tank2.getDirectionY() << std::endl;
+
+
     tank1.draw();
     tank2.draw();
 
@@ -293,6 +305,10 @@ void display() {
 void update(int value) {
     /*
     // Update tanks
+
+    //checkInput();
+
+
     tank1.update();
     tank2.update();
 
@@ -318,6 +334,7 @@ void my_reshape(int  width, int  height)
 
 
 void handleKeyPress(unsigned char key, int x, int y) {
+    std::cout << "# key " << key << " hold down" << std::endl;
     switch (key) {
     case 'w':
         tank1.moveUp();
@@ -334,28 +351,61 @@ void handleKeyPress(unsigned char key, int x, int y) {
         /*
     case ' ':
         tank1.shoot();
-        break;*/
+        break;
         
     case 13: // ASCII code for Enter key
         tank2.shoot();
         break;
-        
+        */
+        //key = " ";
+    }
+}
+
+void handleKeyPressUp(unsigned char key, int x, int y) {
+    std::cout << "# key " << key << " released" << std::endl;
+
+    switch (key) {
+    case 'w':
+        tank1.moveLeftRelease();
+        break;
+    case 's':
+        tank1.moveRightRelease();
+        break;
+    case 'a':
+        tank1.moveUpRelease();
+        break;
+    case 'd':
+        tank1.moveDownRelease();
+        break;
+        /*
+    case ' ':
+        tank1.shoot();
+        break;
+    case 13: // ASCII code for Enter key
+        tank2.shoot();
+        break;
+        */
+        //key = " ";
     }
 }
 
 void handleSpecialKeyPress(int key, int x, int y) {
-    switch (key) {
-    case GLUT_KEY_UP:
-        tank2.moveUp();
-        break;
-    case GLUT_KEY_DOWN:
-        tank2.moveDown();
-        break;
-    case GLUT_KEY_LEFT:
-        tank2.moveLeft();
-        break;
-    case GLUT_KEY_RIGHT:
-        tank2.moveRight();
-        break;
-    }
+    keys[key] = true;
+    std::cout << "special key " << key << " hold down" << std::endl;
+
+    if (keys[GLUT_KEY_LEFT])    tank2.moveLeft();
+    if (keys[GLUT_KEY_RIGHT])   tank2.moveRight();
+    if (keys[GLUT_KEY_UP])      tank2.moveUp();
+    if (keys[GLUT_KEY_DOWN])    tank2.moveDown();
+}
+
+void handleSpecialKeyPressUp(int key, int x, int y)
+{
+    keys[key] = false;
+    std::cout << "special key" << key << " released" << std::endl;
+
+    if (!keys[GLUT_KEY_LEFT])   tank2.moveLeftRelease();
+    if (!keys[GLUT_KEY_RIGHT])  tank2.moveRightRelease();
+    if (!keys[GLUT_KEY_UP])     tank2.moveUpRelease();
+    if (!keys[GLUT_KEY_DOWN])   tank2.moveDownRelease();
 }

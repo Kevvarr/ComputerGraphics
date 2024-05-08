@@ -19,7 +19,9 @@ void display();
 void my_reshape(int  width, int  height);
 void update(int value);
 void handleKeyPress(unsigned char key, int x, int y);
+void handleKeyPressUp(unsigned char key, int x, int y);
 void handleSpecialKeyPress(int key, int x, int y);
+void handleSpecialKeyPressUp(int key, int x, int y);
 
 
 

@@ -26,27 +26,39 @@ void Tank::draw() {
 }
 
 void Tank::moveUp() {
-    directionX = 0.0f;
     directionY = 1.0f;
     //std::cout << "Moving Up";
 }
 
 void Tank::moveDown() {
-    directionX = 0.0f;
     directionY = -1.0f;
     //std::cout << "Moving Down";
 }
 
 void Tank::moveLeft() {
     directionX = -1.0f;
-    directionY = 0.0f;
     //std::cout << "Moving Left";
 }
 
 void Tank::moveRight() {
     directionX = 1.0f;
-    directionY = 0.0f;
     //std::cout << "Moving Right";
+}
+
+void Tank::moveUpRelease() {
+    directionY = 0.0f;
+}
+
+void Tank::moveDownRelease() {
+    directionY = 0.0f;
+}
+
+void Tank::moveLeftRelease() {
+    directionX = 0.0f;
+}
+
+void Tank::moveRightRelease() {
+    directionX = 0.0f;
 }
 
 void Tank::moveIdle() {
@@ -54,6 +66,9 @@ void Tank::moveIdle() {
     directionY = 0.0f;
     std::cout << "Moving Idle";
 }
+
+float Tank::getDirectionX() { return this->directionX; }
+float Tank::getDirectionY() { return this->directionY; }
 
 void Tank::shoot() {
     Projectile::create(x, y, directionX, directionY);
