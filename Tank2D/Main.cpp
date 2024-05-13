@@ -269,5 +269,15 @@ void mouseClick(int buttonPressed, int state, int x, int y) {
         mButtonPressed = true;
     else
         mButtonPressed = false;
+
+    if (mouseX >= -200 && mouseX <= 200 && mouseY >= 150 && mouseY <= 250) {
+        glColor3f(0, 0, 1);
+        if (mButtonPressed) {
+            viewPage = View::GAME;
+            mButtonPressed = false;
+        }
+    }
+    else
+        glColor3f(0, 0, 0);
     glutPostRedisplay();
 }

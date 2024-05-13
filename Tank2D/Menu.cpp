@@ -59,22 +59,15 @@ void screenMenu()
     glVertex2f(200, -50);
     glEnd();
 
-    displayRasterText(-200, -200, 0.0, "Screen MENU");
 
 
-    if (mouseX >= -200 && mouseX <= 200 && mouseY >= 150 && mouseY <= 250) {
-        glColor3f(0, 0, 1);
-        if (mButtonPressed) {
-            //viewPage = View::GAME;
-            mButtonPressed = false;
-        }
-    }
-    else
-        glColor3f(0, 0, 0);
+ 
 
     displayRasterText(-30, 200, 0.4,  "Start Game");
     displayRasterText(-30, 50, 0.4,   " Options  ");
     displayRasterText(-30, -100, 0.4, " Exit     ");
+    displayRasterText(-200, -200, 0.0, "Screen MENU");
+
     /*
     if (mouseX >= -100 && mouseX <= 100 && mouseY >= 30 && mouseY <= 80) {
         glColor3f(0, 0, 1);
