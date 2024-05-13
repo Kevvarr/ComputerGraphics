@@ -3,10 +3,13 @@
 
 #include <string>
 
+
 class Tank {
 public:
     Tank(std::string imageFile, int x, int y);
     void draw();
+    void loadTexture(std::string ImageFile);
+    void drawTexture();
     void moveUp();
     void moveDown();
     void moveLeft();
@@ -17,9 +20,10 @@ public:
 
 private:
     std::string imageFile;
+    GLuint textureID;
     int x, y;
-    int size = 20;
-    int speed = 3.5;
+    GLfloat size = 20.0f;
+    float speed = 3.5;
     float directionX = 0.0f; // Horizontal direction (-1 for left, 1 for right)
     float directionY = 0.0f; // Vertical direction (-1 for down, 1 for up)
 };

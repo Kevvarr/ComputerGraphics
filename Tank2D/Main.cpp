@@ -37,7 +37,8 @@ void display() {
     //gluLookAt(eyeX, eyeY, eyeZ, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
     tank1.draw();
-    tank2.draw();
+    tank1.drawTexture();
+    //tank2.draw();
 
     glutSwapBuffers();
     //glFlush();
@@ -46,10 +47,10 @@ void display() {
 void update(int value) {
     // Update tanks
     tank1.update();
-    tank2.update();
+    //tank2.update();
 
     // Update projectiles
-    Projectile::updateAll();
+    //Projectile::updateAll();
 
     glutPostRedisplay();
     glutTimerFunc(16, update, 0); // Update every 16 milliseconds (about 60 fps)
@@ -97,16 +98,16 @@ void handleKeyPress(unsigned char key, int x, int y) {
 void handleSpecialKeyPress(int key, int x, int y) {
     switch (key) {
     case GLUT_KEY_UP:
-        tank2.moveUp();
+        //tank2.moveUp();
         break;
     case GLUT_KEY_DOWN:
-        tank2.moveDown();
+        //tank2.moveDown();
         break;
     case GLUT_KEY_LEFT:
-        tank2.moveLeft();
+        //tank2.moveLeft();
         break;
     case GLUT_KEY_RIGHT:
-        tank2.moveRight();
+        //tank2.moveRight();
         break;
     }
 }

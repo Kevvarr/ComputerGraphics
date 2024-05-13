@@ -11,8 +11,11 @@
 
 #define PI 3.141592654
 
+//#include "textures.h"
 #include "tank.h"
-#include "projectile.h"
+//#include "projectile.h"
+
+
 
 void display();
 void my_reshape(int  width, int  height);
