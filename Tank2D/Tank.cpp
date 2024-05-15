@@ -22,6 +22,7 @@ void Tank::draw() {
     glVertex2f(x + size, y + size);
     glVertex2f(x - size, y + size);
     glEnd();
+    //std::cout << x << ", " << y << std::endl;
     glFlush();
 }
 

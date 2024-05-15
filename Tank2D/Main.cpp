@@ -4,35 +4,27 @@
 
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
-    //Tank tank1 = new Tank("/Image/t34.png", 100, 100);
-    //Tank tank2 = new Tank("/Image/panzer.png", 500, 500);
-
-    // Windows Config
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitWindowSize(INIT_WINDOWS_SIZE_WEIGHT, INIT_WINDOWS_SIZE_HEIGHT);
-    //glutInitWindowPosition(0, 0);
-    //glutInitWindowSize(1200, 900);
+    // glutInitWindowPosition(0, 0);
     glutCreateWindow("Tank Game");
 
     glClearColor(0.0, 0.0, 0.0, 0);
-    glColor3f(1.0, 0.0, 0.0);
 
-    glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
+    glMatrixMode(GL_PROJECTION);
     gluOrtho2D(
         -(int)INIT_WINDOWS_SIZE_WEIGHT / 2,
-        (int)INIT_WINDOWS_SIZE_WEIGHT/ 2,
+         (int)INIT_WINDOWS_SIZE_WEIGHT / 2,
         -(int)INIT_WINDOWS_SIZE_HEIGHT / 2,
-        (int)INIT_WINDOWS_SIZE_HEIGHT / 2);
-//  gluOrtho2D(-200,200,-200,200);
+         (int)INIT_WINDOWS_SIZE_HEIGHT / 2);
     glMatrixMode(GL_MODELVIEW);
 
     ///BackGround green color
     //glClearColor(0.0, 1.0, 0.0, 1.0);
-    glClearColor((double)  7 / 255, 
-                 (double) 63 / 255,
-                 (double) 13 / 255, 1.0); // green background
-
+    glClearColor((double) 53 / 255, 
+                 (double) 24 / 255,
+                 (double) 14 / 255, 1.0); // green background - RGB
 
 
     // Handle funtions
@@ -42,9 +34,9 @@ int main(int argc, char** argv) {
     glutSpecialFunc(handleSpecialKeyPress);
 
     glutMouseFunc(mouseClick);
-    glGetIntegerv(GL_VIEWPORT, m_viewport);
     glutPassiveMotionFunc(passiveMotionFunc);
 
+    glGetIntegerv(GL_VIEWPORT, m_viewport);
     glutReshapeFunc(my_reshape);
     glutDisplayFunc(display);
     glutTimerFunc(0, timer, 0);
@@ -68,24 +60,20 @@ void display() {
 
     switch (viewPage)
     {
-    case View::INTRO:
-        screenIntro();
-        //std::cout << "INTRO MODE" << std::endl;
-        break;
-    case View::MENU:
-        screenMenu();
-        break;
-    case View::GAME:
-        //screenGame();
-        //reset scaling values
-        //glScalef(1 / 2, 1 / 2, 0);
-        //tank1.draw();
-        //tank2.draw();
-        break;
-    case View::GAMEOVER:
-        //displayGameOverMessage();
-        screenIntro();
-        break;
+        case View::INTRO:
+            screenIntro();
+            //std::cout << "INTRO MODE" << std::endl;
+            break;
+        case View::MENU:
+            screenMenu();
+            break;
+        case View::GAME:
+            screenGame();
+            break;
+        case View::GAMEOVER:
+            //displayGameOverMessage();
+            screenIntro();
+            break;
     }
 
 
@@ -144,12 +132,12 @@ void handleKeyPress(unsigned char key, int x, int y) {
     std::cout << "# key status:  " << keys[13] << "." << std::endl;
 
     if (keys[13] == true && viewPage == View::INTRO) viewPage = View::MENU;
-    if (keys[int('z')] == true && viewPage == View::MENU) viewPage = View::GAME;
-    if (keys[int('x')] == true && viewPage == View::GAME) viewPage = View::INTRO;
-    //if (keys[int('n')] == true && viewPage == MENU) viewPage = GAME;
+    if (keys[int('m')] == true && viewPage == View::MENU) viewPage = View::GAME;
+    if (keys[int('g')] == true && viewPage == View::GAME) viewPage = View::INTRO;
+    if (keys[int('x')] == true && viewPage == View::GAMEOVER) viewPage = View::GAMEOVER;
 
-    // Testing zoom area
-    if (keys[int('i')] == true && viewPage == View::MENU) {
+    // Testing zoom area keys
+    if (keys[int('i')] == true && viewPage == View::GAME) {
         m_viewport[0] = 0; // X-coordinate of the lower left corner
         m_viewport[1] = 0; // Y-coordinate of the lower left corner
         m_viewport[2] = 800; // Width of the viewport
@@ -157,7 +145,7 @@ void handleKeyPress(unsigned char key, int x, int y) {
         glViewport(m_viewport[0], m_viewport[1], m_viewport[2], m_viewport[3]);
     }
 
-    if (keys[int('o')] == true && viewPage == View::MENU) {
+    if (keys[int('o')] == true && viewPage == View::GAME) {
         m_viewport[0] = 0; // X-coordinate of the lower left corner
         m_viewport[1] = 0; // Y-coordinate of the lower left corner
         m_viewport[2] = 400; // Width of the viewport
@@ -265,19 +253,59 @@ void passiveMotionFunc(int x, int y) {
 void mouseClick(int buttonPressed, int state, int x, int y) {
     std::cout << "Mouse clicked on: " << x << ", " << y << std::endl;
 
-    if (buttonPressed == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-        mButtonPressed = true;
-    else
-        mButtonPressed = false;
+    if (buttonPressed == GLUT_LEFT_BUTTON && state == GLUT_DOWN) mButtonPressed = true;
+    else mButtonPressed = false;
 
-    if (mouseX >= -200 && mouseX <= 200 && mouseY >= 150 && mouseY <= 250) {
-        glColor3f(0, 0, 1);
+    // Game button action
+    if (mouseX >= -260 && mouseX <= 260 && 
+        mouseY >= -180 && mouseY <= -110) {
+        glColor3f(1, 0, 0);
+        displayRasterText(-30, 200, 0.4, "Start Game");
         if (mButtonPressed) {
             viewPage = View::GAME;
             mButtonPressed = false;
         }
     }
     else
+        glColor3f(1, 1, 0);
+
+    // Exit button action
+    if (mouseX >= -260 && mouseX <= 260 && 
+        mouseY >= 40 && mouseY <= 110) {
+        glColor3f(1, 0, 0);
+        displayRasterText(-30, -100, 0.4, " Exit     ");
+        if (mButtonPressed) {
+            mButtonPressed = false;
+            exit(0);
+        }
+    }
+    else
         glColor3f(0, 0, 0);
+
+    glutPostRedisplay();
+}
+
+void screenGame()
+{
+    //reset scaling values
+    // glScalef(1 / 2, 1 / 2, 0);
+    
+    //Border
+    glLineWidth(10);
+    glColor3f(1, 0, 0);
+    glBegin(GL_LINE_LOOP);
+    glVertex2f(-220, -300);
+    glVertex2f(-220, 300);
+    glVertex2f(220, +300);
+    glVertex2f(220, -300);
+    glEnd();
+
+    // Update tanks
+    tank1.draw(); tank1.update();
+    tank2.draw(); tank2.update();
+
+    // Update projectiles
+    Projectile::updateAll();
+
     glutPostRedisplay();
 }

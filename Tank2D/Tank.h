@@ -24,7 +24,7 @@ private:
     std::string imageFile;
     int x, y;
     int size = 20;
-    float speed = 3.5;
+    float speed = 1.0;
     float directionX = 0.0f; // Horizontal direction (-1 for left, 1 for right)
     float directionY = 0.0f; // Vertical direction (-1 for down, 1 for up)
 };

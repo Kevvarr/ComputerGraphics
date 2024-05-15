@@ -1,6 +1,6 @@
 #pragma once
-#define INIT_WINDOWS_SIZE_WEIGHT 800
-#define INIT_WINDOWS_SIZE_HEIGHT 600
+#define INIT_WINDOWS_SIZE_WEIGHT 1200
+#define INIT_WINDOWS_SIZE_HEIGHT 900
 
 bool isFullscreen = false;
 float mouseX, mouseY;
