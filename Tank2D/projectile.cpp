@@ -1,30 +1,47 @@
 #include <GL/glut.h>
 #include "projectile.h"
+#include <iostream>
 
 std::vector<Projectile> projectiles;
+
 
 void Projectile::create(int x, int y, int directionX, int directionY) {
     Projectile projectile;
     projectile.x = x;
     projectile.y = y;
+    projectile.directionX = directionX;
+    projectile.directionY = directionY;
     // Set direction and speed here
+
+    
     projectiles.push_back(projectile);
+    projectile.draw();
+    std::cout << "Prjectile";
+}
+
+void Projectile::drawAll() {
+    for (auto& projectile : projectiles) {
+        projectile.draw();
+    }
+    
 }
 
 void Projectile::updateAll() {
     for (auto& projectile : projectiles) {
         // Update projectile position based on direction and speed
-        projectile.y += projectile.speed;
+        projectile.x += projectile.speed * projectile.directionX;
+        projectile.y += projectile.speed * projectile.directionY;
     }
 }
 
 void Projectile::draw() {
     // Assuming projectile is drawn as a small rectangle
-    glColor3f(1.0, 0.0, 0.0); // Red color for projectile
+    glColor3f(1.0, 1.0, 0.0); // Red color for projectile
     glBegin(GL_POLYGON);
-    glVertex2f(x - 2, y - 2); // Assuming projectile size is 4x4
-    glVertex2f(x + 2, y - 2);
-    glVertex2f(x + 2, y + 2);
-    glVertex2f(x - 2, y + 2);
+    glVertex2f(x - size, y - size); // Assuming projectile size is 4x4
+    glVertex2f(x + size, y - size);
+    glVertex2f(x + size, y + size);
+    glVertex2f(x - size, y + size);
     glEnd();
+    std::cout << "Drawed";
 }

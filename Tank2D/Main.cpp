@@ -39,6 +39,10 @@ void display() {
     tank1.draw();
     tank2.draw();
 
+    Projectile::drawAll();
+
+    
+
     glutSwapBuffers();
     //glFlush();
 }
@@ -83,14 +87,13 @@ void handleKeyPress(unsigned char key, int x, int y) {
     case 'd':
         tank1.moveRight();
         break;
-        /*
-    case ' ':
+    case 'q':
         tank1.shoot();
         break;
-    case 13: // ASCII code for Enter key
+    case 'o': // ASCII code for Enter key
         tank2.shoot();
         break;
-        */
+        
     }
 }
 

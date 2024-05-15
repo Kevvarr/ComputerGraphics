@@ -56,6 +56,7 @@ void Tank::moveIdle() {
 }
 
 void Tank::shoot() {
+    std::cout << "Shoot Function";
     Projectile::create(x, y, directionX, directionY);
 }
 
