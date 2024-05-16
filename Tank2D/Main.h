@@ -22,7 +22,7 @@
 int main(int argc, char** argv);
 void display();
 void my_reshape(int  width, int  height);
-void timer(int value);
+void update(int value);
 
 //Keyboard
 void handleKeyPress(unsigned char key, int x, int y);

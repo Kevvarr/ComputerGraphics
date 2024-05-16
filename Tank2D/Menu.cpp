@@ -13,8 +13,8 @@ void screenIntro()
     displayRasterText(-150, -250, 0.0, "Press ENTER to start the game");
 
     //glFlush();
-    glutPostRedisplay();
-    //glutSwapBuffers();
+    //glutPostRedisplay();
+    glutSwapBuffers();
 }
 
 

@@ -11,7 +11,6 @@ int main(int argc, char** argv) {
     glutCreateWindow("Tank Game");
 
 
-
     glClearColor(0.0, 0.0, 0.0, 0);
 
     glLoadIdentity();
@@ -33,18 +32,13 @@ int main(int argc, char** argv) {
     // Handle funtions
     //glutIdleFunc(refresh);
 
-    glutKeyboardFunc(handleKeyPress);
-    glutSpecialFunc(handleSpecialKeyPress);
+    //glutKeyboardFunc(handleKeyPress);
+    //glutSpecialFunc(handleSpecialKeyPress);
 
     glutMouseFunc(mouseClick);
     glutPassiveMotionFunc(passiveMotionFunc);
 
-    // glGetIntegerv(GL_VIEWPORT, m_viewport);
 
-
-    glutReshapeFunc(my_reshape);
-    glutDisplayFunc(display);
-    glutTimerFunc(0, update, 0);
 
     // Handle funtions
     glutSetKeyRepeat(GLUT_KEY_REPEAT_OFF);
@@ -54,6 +48,12 @@ int main(int argc, char** argv) {
     glutSpecialFunc(handleSpecialKeyPress);
     glutSpecialUpFunc(handleSpecialKeyPressUp);
 
+
+    glGetIntegerv(GL_VIEWPORT, m_viewport);
+
+    glutReshapeFunc(my_reshape);
+    glutDisplayFunc(display);
+    glutTimerFunc(0, update, 0);
     glutMainLoop();
 
     return 0;
@@ -170,6 +170,12 @@ void handleKeyPress(unsigned char key, int x, int y) {
         case 'd':
             tank1.moveRight();
             break;
+        case 'q':
+            tank1.shoot();
+            break;
+        case 'k': // ASCII code for Enter key
+            tank2.shoot();
+            break;
             /*
         case ' ':
             tank1.shoot();
@@ -259,6 +265,7 @@ void handleSpecialKeyPress(int key, int x, int y) {
     if (keys[GLUT_KEY_RIGHT])   tank2.moveRight();
     if (keys[GLUT_KEY_UP])      tank2.moveUp();
     if (keys[GLUT_KEY_DOWN])    tank2.moveDown();
+
 }
 
 void handleSpecialKeyPressUp(int key, int x, int y)
@@ -340,8 +347,8 @@ void screenGame()
     glLoadIdentity();
 
     // Update tanks
-    tank1.draw(); tank1.update();
-    tank2.draw(); tank2.update();
+    tank1.draw(); //tank1.update();
+    tank2.draw(); //tank2.update();
 
     // Update projectiles
     Projectile::drawAll();
