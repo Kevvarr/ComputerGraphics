@@ -146,12 +146,15 @@
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Menu.cpp" />
     <ClCompile Include="projectile.cpp" />
     <ClCompile Include="Tank.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ExternDeclarations.h" />
     <ClInclude Include="GlobalDeclarations.h" />
     <ClInclude Include="Main.h" />
+    <ClInclude Include="Menu.h" />
     <ClInclude Include="projectile.h" />
     <ClInclude Include="Tank.h" />
   </ItemGroup>
