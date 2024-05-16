@@ -1,5 +1,5 @@
 #include "Main.h"
-#include "GlobalDeclarations.h"
+// #include "GlobalDeclarations.h"
 
 int main(int argc, char** argv) {
     glutInit(&argc, argv);
@@ -129,13 +129,13 @@ void my_reshape(int  width, int  height)
 void handleKeyPress(unsigned char key, int x, int y) {
     keys[key] = true;
 
-    std::cout << "# key " << key << " released" << std::endl;
+    std::cout << "# normal key: " << key << " released" << std::endl;
     std::cout << "# VIEW:  " << static_cast<std::underlying_type<View>::type>(viewPage) << "." << std::endl;
     std::cout << "# key status:  " << keys[13] << "." << std::endl;
 
     if (keys[13] == true && viewPage == View::INTRO) viewPage = View::MENU;
-    if (keys[int('m')] == true && viewPage == View::MENU) viewPage = View::GAME;
-    if (keys[int('g')] == true && viewPage == View::GAME) viewPage = View::INTRO;
+    if (keys[int('g')] == true && viewPage == View::MENU) viewPage = View::GAME;
+    // if (keys[int('g')] == true && viewPage == View::GAME) viewPage = View::INTRO;
     if (keys[int('x')] == true && viewPage == View::GAMEOVER) viewPage = View::GAMEOVER;
 
     // Testing zoom area keys
@@ -156,7 +156,7 @@ void handleKeyPress(unsigned char key, int x, int y) {
     }
 
     if (viewPage == View::GAME) {
-        std::cout << "# key " << key << " hold down" << std::endl;
+        std::cout << "# view::game, normal-key: " << key << " hold down" << std::endl;
         switch (key) {
         case 'w':
             tank1.moveUp();
@@ -291,7 +291,7 @@ void passiveMotionFunc(int x, int y) {
         \t Ortohognal : (" << mouseX << ", " << mouseY << ")." << std::endl;
 
     //Do calculations to find value of LaserAngle
-    glutPostRedisplay();
+    // glutPostRedisplay();
 }
 
 void mouseClick(int buttonPressed, int state, int x, int y) {
@@ -300,39 +300,43 @@ void mouseClick(int buttonPressed, int state, int x, int y) {
     if (buttonPressed == GLUT_LEFT_BUTTON && state == GLUT_DOWN) mButtonPressed = true;
     else mButtonPressed = false;
 
-    // Game button action
-    if (mouseX >= -260 && mouseX <= 260 && 
-        mouseY >= -180 && mouseY <= -110) {
-        glColor3f(1, 0, 0);
-        displayRasterText(-30, 200, 0.4, "Start Game");
-        if (mButtonPressed) {
-            viewPage = View::GAME;
-            mButtonPressed = false;
-        }
-    }
-    else
-        glColor3f(1, 1, 0);
+    if (viewPage == View::MENU) {
 
-    // Exit button action
-    if (mouseX >= -260 && mouseX <= 260 && 
-        mouseY >= 40 && mouseY <= 110) {
-        glColor3f(1, 0, 0);
-        displayRasterText(-30, -100, 0.4, " Exit     ");
-        if (mButtonPressed) {
-            mButtonPressed = false;
-            exit(0);
+        // Game button action
+        if (mouseX >= -260 && mouseX <= 260 &&
+            mouseY >= -180 && mouseY <= -110) {
+            glColor3f(1, 0, 0);
+            displayRasterText(-30, 200, 0.4, "Start Game");
+            if (mButtonPressed) {
+                viewPage = View::GAME;
+                mButtonPressed = false;
+            }
         }
-    }
-    else
-        glColor3f(0, 0, 0);
+        else
+            glColor3f(1, 1, 0);
 
-    glutPostRedisplay();
+        // Exit button action
+        if (mouseX >= -260 && mouseX <= 260 &&
+            mouseY >= 40 && mouseY <= 110) {
+            glColor3f(1, 0, 0);
+            displayRasterText(-30, -100, 0.4, " Exit     ");
+            if (mButtonPressed) {
+                mButtonPressed = false;
+                exit(0);
+            }
+        }
+        else
+            glColor3f(0, 0, 0);
+
+        glutPostRedisplay();
+    }
 }
 
 void screenGame()
 {
+    glLoadIdentity();
     //reset scaling values
-    // glScalef(1 / 2, 1 / 2, 0);
+    //glScalef(1 / 2, 1, 0);
     
     //Border
     glLineWidth(10);
@@ -344,7 +348,6 @@ void screenGame()
     glVertex2f(220, -300);
     glEnd();
 
-    glLoadIdentity();
 
     // Update tanks
     tank1.draw(); //tank1.update();
@@ -353,7 +356,7 @@ void screenGame()
     // Update projectiles
     Projectile::drawAll();
 
-    glutPostRedisplay();
+    //glutPostRedisplay();
 
 
     //tank1 = new Tank("/Image/t34.png", 100, 100);

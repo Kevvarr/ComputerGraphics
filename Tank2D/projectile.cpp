@@ -62,5 +62,5 @@ void Projectile::draw() {
     glVertex2f(x + size, y + size);
     glVertex2f(x - size, y + size);
     glEnd();
-    std::cout << "Drawed";
+    // std::cout << "Drawed";
 }

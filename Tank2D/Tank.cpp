@@ -8,7 +8,7 @@ const float PI = 3.14159265;
 Tank::Tank(std::string imageFile, int x, int y) : imageFile(imageFile), x(x), y(y) {
     x = x;
     y = y;
-    imageFile = imageFile;
+    this->imageFile = imageFile;
     std::cout << "XX: " << x;
     std::cout << "YY: " << y;
 }

@@ -66,7 +66,8 @@ void screenMenu()
     //displayRasterText(-30, 50, 0.4,   " Options  ");
     displayRasterText(-30, -100, 0.4, " Exit     ");
    
-    glutPostRedisplay();
+    //glutPostRedisplay();
+    glutSwapBuffers();
 }
 
 
