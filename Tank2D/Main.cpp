@@ -53,7 +53,9 @@ void update(int value) {
     tank2.update();
 
     // Update projectiles
+    Projectile::updateAlive();
     Projectile::updateAll();
+
 
     glutPostRedisplay();
     glutTimerFunc(16, update, 0); // Update every 16 milliseconds (about 60 fps)
