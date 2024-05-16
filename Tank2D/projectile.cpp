@@ -12,25 +12,44 @@ void Projectile::create(int x, int y, int directionX, int directionY) {
     projectile.directionX = directionX;
     projectile.directionY = directionY;
     // Set direction and speed here
-
-    
     projectiles.push_back(projectile);
-    projectile.draw();
-    std::cout << "Prjectile";
 }
 
 void Projectile::drawAll() {
     for (auto& projectile : projectiles) {
-        projectile.draw();
+        if (projectile.alive) {
+            projectile.draw();
+        }
     }
     
 }
 
-void Projectile::updateAll() {
+void Projectile::destroy(Projectile projectile) {
+    std::cout << "Destroy";
+    //delete(projectile);
+}
+
+void Projectile::updateAlive() {
     for (auto& projectile : projectiles) {
         // Update projectile position based on direction and speed
-        projectile.x += projectile.speed * projectile.directionX;
-        projectile.y += projectile.speed * projectile.directionY;
+        projectile.counterTimer++;
+
+        if (projectile.counterTimer > projectile.counterTimerMax) {
+            projectile.alive = false;
+        }
+    }
+}
+
+
+
+void Projectile::updateAll() {
+    for (auto& projectile : projectiles) {
+        if (projectile.alive) {
+            // Update projectile position based on direction and speed
+            projectile.x += projectile.speed * projectile.directionX;
+            projectile.y += projectile.speed * projectile.directionY;
+        }
+        
     }
 }
 
