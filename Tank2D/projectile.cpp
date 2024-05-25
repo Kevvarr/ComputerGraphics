@@ -5,6 +5,10 @@
 std::vector<Projectile> projectiles;
 
 
+std::vector<Projectile> Projectile::getProjectiles() {
+    return projectiles;
+}
+
 void Projectile::create(int x, int y, int directionX, int directionY) {
     Projectile projectile;
     projectile.x = x;
@@ -21,9 +25,16 @@ void Projectile::drawAll() {
             projectile.draw();
         }
     }
-    
 }
 
+void Projectile::collisionDetectionAll() {
+    for (auto& projectile : projectiles) {
+        if (projectile.alive && projectile.kill) {
+            float x = projectile.x; float y = projectile.y;
+        }
+    }
+
+}
 void Projectile::destroy(Projectile projectile) {
     std::cout << "Destroy";
     //delete(projectile);
@@ -33,9 +44,14 @@ void Projectile::updateAlive() {
     for (auto& projectile : projectiles) {
         // Update projectile position based on direction and speed
         projectile.counterTimer++;
+        projectile.counterTimerKill++;
 
         if (projectile.counterTimer > projectile.counterTimerMax) {
             projectile.alive = false;
+        }
+        if (projectile.counterTimerKill > 5 && projectile.counterTimerKill < 7) {
+            std::cout << "Kill True";
+            projectile.kill = true;
         }
     }
 }

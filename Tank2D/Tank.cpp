@@ -70,6 +70,8 @@ void Tank::moveIdle() {
 
 float Tank::getDirectionX() { return this->directionX; }
 float Tank::getDirectionY() { return this->directionY; }
+float Tank::getX() { return this->x; }
+float Tank::getY() { return this->y; }
 
 void Tank::shoot() {
     std::cout << "Shoot Function";

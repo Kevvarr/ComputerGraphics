@@ -32,6 +32,6 @@ void handleSpecialKeyPressUp(int key, int x, int y);
 // Mouse
 void passiveMotionFunc(int x, int y);
 void mouseClick(int buttonPressed, int state, int x, int y);
-
+void detectCollisions(Tank tank1, Tank tank2);
 
 #endif

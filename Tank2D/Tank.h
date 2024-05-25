@@ -17,6 +17,8 @@ public:
     void moveIdle();
     float getDirectionX();
     float getDirectionY();
+    float getX();
+    float getY();
     void shoot();
     void update();
 
