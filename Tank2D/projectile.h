@@ -14,9 +14,9 @@ public:
     static void collisionDetectionAll();
     void detection();
     void draw();
-    void destroy(Projectile);
     int x, y;
     bool kill = false;
+    bool alive = true;
 
 private:
     int directionX, directionY;
@@ -25,7 +25,7 @@ private:
     int counterTimerMax = 50;
     int counterTimerKill = 0;
     int counterTimer = 0;
-    bool alive = true;
+    
     
 };
 

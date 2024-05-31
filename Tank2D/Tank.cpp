@@ -11,6 +11,7 @@ Tank::Tank(std::string imageFile, int x, int y) : imageFile(imageFile), x(x), y(
     this->imageFile = imageFile;
     std::cout << "XX: " << x;
     std::cout << "YY: " << y;
+    this->life = 5;
 }
 
 void Tank::draw() {
@@ -65,7 +66,6 @@ void Tank::moveRightRelease() {
 void Tank::moveIdle() {
     directionX = 0.0f;
     directionY = 0.0f;
-    std::cout << "Moving Idle";
 }
 
 float Tank::getDirectionX() { return this->directionX; }
@@ -74,7 +74,6 @@ float Tank::getX() { return this->x; }
 float Tank::getY() { return this->y; }
 
 void Tank::shoot() {
-    std::cout << "Shoot Function";
     Projectile::create(x, y, directionX, directionY);
 }
 
@@ -102,4 +101,12 @@ void Tank::update() {
         y = 280;
     }
     
+}
+
+void Tank::receiveDamage() {
+    this->life -= 1;
+    std::cout << "Life: " << life << "  -";
+    if (life <= 0) {
+        std::cout << "Tank DEAD!!!!!!!!!!!!!!!!!!!!!!!!!";
+    }
 }
