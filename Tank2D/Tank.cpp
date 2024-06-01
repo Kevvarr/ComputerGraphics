@@ -11,20 +11,23 @@ Tank::Tank(std::string imageFile, int x, int y) : imageFile(imageFile), x(x), y(
     this->imageFile = imageFile;
     std::cout << "XX: " << x;
     std::cout << "YY: " << y;
-    this->life = 5;
+    this->life = 20;
 }
 
 void Tank::draw() {
     // Assuming the tank image is drawn as a rectangle at position (x, y)
-    glColor3f(1.0, 0.0, 0.0); // White color for tank
-    glBegin(GL_POLYGON);
-    glVertex2f(x - size, y - size); // Assuming tank size is 40x40
-    glVertex2f(x + size, y - size);
-    glVertex2f(x + size, y + size);
-    glVertex2f(x - size, y + size);
-    glEnd();
-    //std::cout << x << ", " << y << std::endl;
-    glFlush();
+    if (life > 0) {
+        glColor3f(1.0, 0.0, 0.0); // White color for tank
+        glBegin(GL_POLYGON);
+        glVertex2f(x - size, y - size); // Assuming tank size is 40x40
+        glVertex2f(x + size, y - size);
+        glVertex2f(x + size, y + size);
+        glVertex2f(x - size, y + size);
+        glEnd();
+        //std::cout << x << ", " << y << std::endl;
+        glFlush();
+    }
+    
 }
 
 void Tank::moveUp() {
@@ -105,8 +108,8 @@ void Tank::update() {
 
 void Tank::receiveDamage() {
     this->life -= 1;
-    std::cout << "Life: " << life << "  -";
-    if (life <= 0) {
+    std::cout << "Life: " << this->life << "  -";
+    if (this->life <= 0) {
         std::cout << "Tank DEAD!!!!!!!!!!!!!!!!!!!!!!!!!";
     }
 }

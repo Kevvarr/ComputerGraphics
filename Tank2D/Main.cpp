@@ -1,5 +1,8 @@
 #include "Main.h"
 #include <cmath>
+
+//Tank tank1 = tank1;
+//Tank tank2 = tank2;
 // #include "GlobalDeclarations.h"
 
 int main(int argc, char** argv) {
@@ -92,7 +95,7 @@ void update(int value) {
     // Update projectiles
     Projectile::updateAll();
     Projectile::updateAlive();
-    detectCollisions(tank1, tank2);
+    detectCollisions();
 
     glutPostRedisplay();
     glutTimerFunc(16, update, 0); // Update every 16 milliseconds (about 60 fps)
@@ -374,28 +377,21 @@ void screenGame()
 }
 
 
-void detectCollisions(Tank tank1, Tank tank2) {
+void detectCollisions() {
     std::vector<Projectile> projectiles = Projectile::getProjectiles();
+
 
     for (auto& projectile : projectiles) {
         if (projectile.alive == true && projectile.kill == true) {
             if (abs(tank1.getX() - projectile.x) < 20 && abs(tank1.getY() - projectile.y) < 20) {
                 projectile.alive = false;
                 projectile.kill = false;
-                //std::cout << "Hit at Tank1: X: " << abs(tank1.getX() - projectile.x) << "Y: " << abs(tank1.getY() - projectile.y);
-                //std::cout << "tank1: X: " << tank1.getX() << " Y: " << tank1.getY();
-                //std::cout << " | projectile X: " << projectile.x << " Y: " << projectile.y << " |||||| ";
                 tank1.receiveDamage();
-
             }
             if (abs(tank2.getX() - projectile.x) < 20 && abs(tank2.getY() - projectile.y) < 20) {
                 projectile.alive = false;
                 projectile.kill = false;
-                //std::cout << "Hit at Tank2: X: " << abs(tank2.getX() - projectile.x) << "Y: " << abs(tank2.getY() - projectile.y);
-                //std::cout << "tank2: X: " << tank2.getX() << " Y: " << tank2.getY();
-                //std::cout << " | projectile X: " << projectile.x << " Y: " << projectile.y << " |||||| ";
                 tank2.receiveDamage();
-
             }
         }
     }
