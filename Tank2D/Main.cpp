@@ -356,6 +356,7 @@ void screenGame()
 
 
     // Update tanks
+  
     tank1.draw(); //tank1.update();
     tank2.draw(); //tank2.update();
 

@@ -27,6 +27,8 @@ void Tank::draw() {
         //std::cout << x << ", " << y << std::endl;
         glFlush();
     }
+    else {
+    }
     
 }
 
@@ -77,7 +79,8 @@ float Tank::getX() { return this->x; }
 float Tank::getY() { return this->y; }
 
 void Tank::shoot() {
-    Projectile::create(x, y, directionX, directionY);
+    if(this->life > 0 && (directionX != 0 || directionY != 0))
+        Projectile::create(x, y, directionX, directionY);
 }
 
 void Tank::update() {
