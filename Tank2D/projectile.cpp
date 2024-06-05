@@ -58,7 +58,7 @@ void Projectile::updateAll() {
 
 void Projectile::draw() {
     // Assuming projectile is drawn as a small rectangle
-    glColor3f(1.0, 1.0, 0.0); // Red color for projectile
+    glColor3f(1.0, 1.0, 0.0); // Yellow color for projectile
     glBegin(GL_POLYGON);
     glVertex2f(x - size, y - size); // Assuming projectile size is 4x4
     glVertex2f(x + size, y - size);

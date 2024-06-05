@@ -8,7 +8,11 @@ void screenIntro()
         (double)63 / 255,
         (double)13 / 255, 1.0); // green background
     glColor3f(1.0, 0.0, 0.0);
-    displayRasterText(-50, 250, 0.0, "Tank 2d");
+    displayRasterText(-55, 250, 0.0, "TANK 2D BATTLE");
+    glColor3f(1.0, 1.0, 1.0);
+    displayRasterText(-150, -150, 0.0, "WASD/Q Tank1");
+    glColor3f(1.0, 1.0, 1.0);
+    displayRasterText(-150, -200, 0.0, "ArrowKeys/K Tank2");
     glColor3f(1.0, 1.0, 1.0);
     displayRasterText(-150, -250, 0.0, "Press ENTER to start the game");
 

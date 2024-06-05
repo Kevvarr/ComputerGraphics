@@ -10,8 +10,8 @@ GLint m_viewport[4];
 enum class View { INTRO, MENU, GAME, GAMEOVER };
 View viewPage = View::INTRO; // initial value
 
-Tank tank1("/Image/t34.png", -300, 0); // Initial position of tank 1
-Tank tank2("/Image/panzer.png", 300, 0); // Initial position of tank 2
+Tank tank1("/Image/t34.png", -200, 0); // Initial position of tank 1
+Tank tank2("/Image/panzer.png", 200, 0); // Initial position of tank 2
 
 GLfloat eyeX = 0.0f;
 GLfloat eyeY = 2.0f;
