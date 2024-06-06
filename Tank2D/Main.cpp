@@ -348,10 +348,10 @@ void screenGame()
     glLineWidth(10);
     glColor3f(1, 0, 0);
     glBegin(GL_LINE_LOOP);
-    glVertex2f(-220, -300);
-    glVertex2f(-220, 300);
-    glVertex2f(220, +300);
-    glVertex2f(220, -300);
+    glVertex2f(-(int)INIT_WINDOWS_SIZE_HEIGHT / 2, -(int)INIT_WINDOWS_SIZE_WEIGHT / 2);
+    glVertex2f(-(int)INIT_WINDOWS_SIZE_HEIGHT / 2, +(int)INIT_WINDOWS_SIZE_WEIGHT / 2);
+    glVertex2f((int)INIT_WINDOWS_SIZE_HEIGHT / 2, +(int)INIT_WINDOWS_SIZE_WEIGHT / 2);
+    glVertex2f((int)INIT_WINDOWS_SIZE_HEIGHT / 2, -(int)INIT_WINDOWS_SIZE_WEIGHT / 2);
     glEnd();
 
 
