@@ -2,7 +2,7 @@
 #define INIT_WINDOWS_SIZE_WEIGHT 1200
 #define INIT_WINDOWS_SIZE_HEIGHT 900
 
-bool isFullscreen = false;
+bool isFullscreen = true;
 float mouseX, mouseY;
 bool mButtonPressed = false;
 

@@ -93,18 +93,18 @@ void Tank::update() {
     //y = 0;
     
     // Ensure tank stays within the bounds of the screen
-    if (x < -201) {
-        x = -201;
+    if (x < -400) {
+        x = -400;
     }
-    else if (x > 201) {
-        x = 201;
+    else if (x > 400) {
+        x = 400;
     }
 
-    if (y < -275) {
-        y = -275;
+    if (y < -450) {
+        y = -450;
     }
-    else if (y > 275) {
-        y = 275;
+    else if (y > 450) {
+        y = 450;
     }
     
 }
